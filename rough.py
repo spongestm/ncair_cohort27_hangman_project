@@ -1,24 +1,24 @@
+#importing relevant packages
 import random
 from retrieve_word_fn import retrieve_word
 
 
-def hangman():
+def hangman():#game function
     print("🎮 Welcome to Hangman!")
 
     # Get a random word (length between 4 and 14 allowed)
-    word_to_guess = retrieve_word(6).lower()  # here I chose 6 letters, you can change this
+    word_to_guess = retrieve_word(6).lower()  # using the retrieve function to set the number of letters in the word
     guessed_letters = []
-    attempts_remaining = 6  # Number of allowed wrong guesses
+    attempts_remaining = 6  # Number of wrong guesses allowed
 
     print("A random word has been chosen. Start guessing!\n")
 
     # Game loop
-    while attempts_remaining > 0:
-        # Build display word step by step (expanded version instead of list comprehension)
-        display_word_list = []
+    while attempts_remaining > 0: 
+        display_word_list = [] #a list to store letters guessed correctly 
         for letter in word_to_guess:
             if letter in guessed_letters:
-                display_word_list.append(letter)
+                display_word_list.append(letter) #If user guesses a correct letter it appends it to the list of displayed words
             else:
                 display_word_list.append('_')
         display_word = ''.join(display_word_list)
@@ -33,7 +33,7 @@ def hangman():
         # Ask player for guess
         guess = input("Guess a letter: ").lower()
 
-        # Validate input
+        # input checker for alphabet and multiple letters
         if len(guess) != 1 or not guess.isalpha():
             print("⚠️ Please enter a single letter.")
             continue
@@ -57,3 +57,4 @@ def hangman():
 # Run the game
 if __name__ == "__main__":
     hangman()
+
